@@ -68,9 +68,8 @@ sub Main {
 
 		print "Made move at x:$x y:$y\n";
 
-		Print_grid(@GameBoard);
+		Print_grid();
 	}
 }
-
-#Main();
-Print_grid(@GameBoard);
+Print_grid();
+Main();
