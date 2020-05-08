@@ -17,6 +17,17 @@ sub MakeMove {
 	return 1;
 }
 
+# Print_grid(@name)
+sub Print_grid {
+    my @myarray = @{matrix};
+    for(my $m = 0; $m <= $#myarray; $m++) {
+		for(my $n = 0; $n <= $#myarray; $n++) {
+			print("$myarray[$m][$n] ");
+		}
+		print("\n");
+    }
+}
+
 sub Main {
 	my $isGame = 1;
 	while ($isGame) {
@@ -37,18 +48,9 @@ sub Main {
 		}
 
 		print "Made move at x:$x y:$y\n";
-	}
-}
 
-# Print_grid(@name)
-sub Print_grid {
-    my @myarray = @{matrix};
-    for(my $m = 0; $m <= $#myarray; $m++) {
-	for(my $n = 0; $n <= $#myarray; $n++) {
-	    print("$myarray[$m][$n] ");
+		Print_grid(@GameBoard);
 	}
-	print("\n");
-    }
 }
 
 Main();
