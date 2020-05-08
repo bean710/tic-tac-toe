@@ -1,6 +1,7 @@
 #Main perl file
+use warnings;
 
-my @GameBoard = ((0, 0, 0), (0, 0, 0), (0, 0, 0));
+my @GameBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
 sub MakeMove {
 	my ($x, $y) = @_;
@@ -12,13 +13,19 @@ sub MakeMove {
 	if ($GameBoard[$x][$y] != 0) {
 		return 0;
 	} else {
+		my @tl = @GameBoard[$x];
+		print $tl;
+		#splice(@GameBoard, )
 		$GameBoard[$x][$y] = 1;
+		return 1;
 	}
-	return 1;
+
+	return 0;
 }
 
 # Print_grid(@name)
 sub Print_grid {
+	print "Board: $GameBoard";
     my @myarray = @{matrix};
     for(my $m = 0; $m <= $#myarray; $m++) {
 		for(my $n = 0; $n <= $#myarray; $n++) {
