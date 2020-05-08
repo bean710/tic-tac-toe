@@ -40,4 +40,15 @@ sub Main {
 	}
 }
 
+# Print_grid(@name)
+sub Print_grid {
+    my @myarray = @{matrix};
+    for(my $m = 0; $m <= $#myarray; $m++) {
+	for(my $n = 0; $n <= $#myarray; $n++) {
+	    print("$myarray[$m][$n] ");
+	}
+	print("\n");
+    }
+}
+
 Main();
