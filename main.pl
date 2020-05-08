@@ -25,13 +25,14 @@ sub MakeMove {
 
 # Print_grid(@name)
 sub Print_grid {
-	print "Board: $GameBoard";
-    my @myarray = @{matrix};
-    for(my $m = 0; $m <= $#myarray; $m++) {
-		for(my $n = 0; $n <= $#myarray; $n++) {
-			print("$myarray[$m][$n] ");
-		}
-		print("\n");
+    print "Board: \n";
+    $length = scalar @GameBoard;
+    $length += 1;
+    for(my $m = 0; $m <= $length; $m++) {
+	for(my $n = 0; $n <= $length; $n++) {
+	    print("$GameBoard[0][$m][$n] ");
+	}
+	print("\n")
     }
 }
 
@@ -60,4 +61,5 @@ sub Main {
 	}
 }
 
-Main();
+#Main();
+Print_grid(@GameBoard);
