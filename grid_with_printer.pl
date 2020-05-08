@@ -12,9 +12,10 @@ sub MakeMove {
 
 sub Main {
     my $isGame = 1;
-    my @grid = ( [' ', ' ', ' '],
-                  [' ', ' ', ' '],
-		 [' ', ' ', ' '] );
+    my @grid = ( ['a', 'b', 'c'],
+                  ['d', 'e', 'f'],
+		 ['g', 'h', 'i'] );
+
     while ($isGame) {
         print "Enter x coordinate: ";
         my $x = <STDIN>;
@@ -38,5 +39,20 @@ sub Main {
             }
             print "\n";
         }
+
+	if (($grid[0][0] eq $grid[0][1] && $grid[0][1] eq $grid[0][2]) or
+            ($grid[1][0] eq $grid[1][1] && $grid[1][1] eq $grid[1][2]) or
+            ($grid[2][0] eq $grid[2][1] && $grid[2][1] eq $grid[2][2]))
+	{print "Row win";}
+
+        elsif(($grid[0][0] eq $grid[1][0] && $grid[1][0] eq $grid[2][0]) or
+              ($grid[0][1] eq $grid[1][1] && $grid[1][1] eq $grid[2][1]) or
+              ($grid[0][2] eq $grid[1][2] && $grid[1][2] eq $grid[2][2]))
+	{print "Column win\n";}
+
+        elsif (($grid[0][0] eq $grid[1][1] &&  $grid[1][1] eq $grid[2][2]) or
+               ($grid[2][0] eq $grid[1][1] &&  $grid[1][1] eq $grid[0][2]))
+	{print "Diagnal win\n";}
     }
+}
 Main();
