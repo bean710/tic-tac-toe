@@ -5,6 +5,9 @@ use strict;
 use Data::Dump 'dump';
 
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
+my $turn = 1;
+my $counter = 0;
+my $isGame = 1;
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -55,6 +58,16 @@ sub Check_diag {
 	}
 }
 
+sub Check_all {
+	# Checks all
+	if (Check_rows(@GameBoard) == 1 || 
+			Check_cols(@GameBoard) == 1 || 
+			Check_diag(@GameBoard) == 1) {
+			$isGame = 0;
+			print "Someone WON!\n"
+		}
+}
+
 sub MakeMove {
 	my ($x, $y, $player) = @_;
 
@@ -62,9 +75,7 @@ sub MakeMove {
 		return 0;
 	}
 
-	if ($player == 2) {
-
-	}
+	#print "Making move $x $y\n";
 
 	#my $coord = $x.$y."";
 	#print "Coord: $coord\n";
@@ -84,7 +95,7 @@ sub MakeMove {
 sub CheckSetPlayer {
 	my ($a, $b, $c) = @_;
 
-	print "Checking: $a$b$c\n";
+	#print "Checking: $a$b$c\n";
 
 	if ($a == 1 and $b == 1 and $c == 0) {
 		return 2;
@@ -102,7 +113,7 @@ sub CheckSetPlayer {
 sub CheckSetRobot {
 	my ($a, $b, $c) = @_;
 
-	print "Checking: $a$b$c\n";
+	#print "Checking: $a$b$c\n";
 
 	if ($a == 2 and $b == 2 and $c == 0) {
 		return 2;
@@ -207,45 +218,84 @@ sub Print_grid {
     }
 }
 
+sub User_input {
+	print "Player 1, please choose a symbol 'X' or 'O'\n";
+	print "input: ";
+	my $player1 = <STDIN>; 
+	chomp $player1;
+
+	return $player1;
+}
+
 sub Main {
-	# print "Player 1, please choose a symbol 'X' or 'O'"
-	# my $player1 = <STDIN>;
+	print "How many players? (1 or 2): ";
+	my $pnum = <STDIN>;
+	chomp $pnum;
+	if ($pnum == 2) {
+		my $player1 = User_input();
+		my $player2 = "";
+		chomp $player1;
+		if ($player1 eq "X") {
+			$player2 = "O";
+		}
+		elsif ($player1 eq "O") {
+			$player2 = "X";
+		}
+		else {
+			return;
+		}
+	}
 
-	# if ($player1 == "X")
-
-
-	my $isGame = 1;
+	$isGame = 1;
 	while ($isGame) {
-		print "Enter x coordinate: ";
-		my $x = <STDIN>;
+		my $ret = 1;
+		my $x = 0;
+		my $y = 0;
+		if (($pnum == 2) or $turn == 1) {
+			print "Player $pnum\'s turn\n";
+			print "Enter x coordinate: ";
+			$x = <STDIN>;
+			$ret = 0;
+			print "Enter y coordinate: ";
+			$y = <STDIN>;
 
-		print "Enter y coordinate: ";
-		my $y = <STDIN>;
-
-		$x =~ s/[^0-9]*//g;
-		$y =~ s/[^0-9]*//g;
-
-		my $ret = MakeMove($y, $x, 1);
-
-		if ($ret == 0) {
-			print "Invalid move! Try again.\n";
-			Print_grid();
-			next;
+			$x =~ s/[^0-9]*//g;
+			$y =~ s/[^0-9]*//g;
 		}
 
-		print "You made move at x:$x y:$y\n";
-		Print_grid();
-
-		MakeSmartRobotMove();
-		print "Computer moved: \n";
-		Print_grid();
-
-		if (Check_rows(@GameBoard) == 1 || 
-			Check_cols(@GameBoard) == 1 || 
-			Check_diag(@GameBoard) == 1) {
-			$isGame = 0;
-			print "Someone WON!\n"
+		if ($turn == 1)
+		{
+			$ret = MakeMove($x, $y, $turn);
+			if ($ret == 0) {
+				print "Invalid move! Try again.\n";
+				Print_grid();
+				next;
+			}
+			$turn = 2;
 		}
+		elsif ($turn == 2)
+		{
+			if ($pnum == 2) {
+				$ret = MakeMove($x, $y, $turn);
+				if ($ret == 0) {
+					print "Invalid move! Try again.\n";
+					Print_grid();
+					next;
+				}
+				$turn = 1;
+			}
+			else {
+				MakeSmartRobotMove();
+				print "Computer moved: \n";
+				$turn = 1;
+				$ret = 1;
+			}
+		}
+		#print "You made move at x:$x y:$y\n";
+		Print_grid();
+
+		Check_all();
+
 	}
 	print "Status: $isGame";
 }
