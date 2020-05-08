@@ -5,11 +5,11 @@ use strict;
 use Data::Dump 'dump';
 
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
-my %GB = {
-	'00' => 0, '01' => 0, '02' => 0,
-	'10' => 0, '11' => 0, '12' => 0,
-	'20' => 0, '21' => 0, '22' => 0
-};
+#my %GB = {
+#	'00' => 0, '01' => 0, '02' => 0,
+#	'10' => 0, '11' => 0, '12' => 0,
+#	'20' => 0, '21' => 0, '22' => 0
+#};
 
 sub MakeMove {
 	my ($x, $y) = @_;
@@ -26,8 +26,7 @@ sub MakeMove {
 	if ($val != 0) {
 		return 0;
 	} else {
-		my @ta = $GameBoard[$x];
-		dump @ta;
+		$GameBoard[$x][$y] = 1;
 		return 1;
 	}
 
@@ -36,7 +35,6 @@ sub MakeMove {
 
 # Print_grid(@name)
 sub Print_grid {
-	dump @GameBoard;
     print "Board: \n";
     my $length = scalar @GameBoard;
     for(my $m = 0; $m < $length; $m++) {
@@ -70,7 +68,7 @@ sub Main {
 
 		Print_grid(@GameBoard);
 	}
+	print "Status: $isGame";
 }
 
-#Main();
-Print_grid(@GameBoard);
+Main();
