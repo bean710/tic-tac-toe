@@ -12,7 +12,7 @@ my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 #};
 
 sub MakeMove {
-	my ($x, $y) = @_;
+	my ($x, $y, $player) = @_;
 
 	if ($x < 0 or $x > 2 or $y < 0 or $y > 2) {
 		return 0;
@@ -26,10 +26,23 @@ sub MakeMove {
 	if ($val != 0) {
 		return 0;
 	} else {
-		$GameBoard[$x][$y] = 1;
+		$GameBoard[$x][$y] = $player;
 		return 1;
 	}
 
+	return 0;
+}
+
+sub MakeRobotMove {
+    my $length = scalar @GameBoard;
+    for(my $m = 0; $m < $length; $m++) {
+		for(my $n = 0; $n < $length; $n++) {
+			if ($GameBoard[$m][$n] == 0) {
+				MakeMove($m, $n, 2);
+				return 1;
+			}
+		}
+    }
 	return 0;
 }
 
@@ -41,7 +54,7 @@ sub Print_grid {
 		for(my $n = 0; $n < $length; $n++) {
 			print("$GameBoard[$m][$n] ");
 		}
-	print("\n")
+		print("\n")
     }
 }
 
@@ -57,15 +70,19 @@ sub Main {
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
-		my $ret = MakeMove($x, $y);
+		my $ret = MakeMove($x, $y, 1);
 
 		if ($ret == 0) {
 			print "Invalid move! Try again.\n";
+			Print_grid();
 			next;
 		}
 
-		print "Made move at x:$x y:$y\n";
+		print "You made move at x:$x y:$y\n";
+		Print_grid();
 
+		MakeRobotMove();
+		print "Computer moved: \n";
 		Print_grid();
 	}
 	print "Status: $isGame";
