@@ -1,8 +1,15 @@
 #!/usr/bin/perl
 #Main perl file
 use warnings;
+use strict;
+use Data::Dump 'dump';
 
-my @GameBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
+my %GB = {
+	'00' => 0, '01' => 0, '02' => 0,
+	'10' => 0, '11' => 0, '12' => 0,
+	'20' => 0, '21' => 0, '22' => 0
+};
 
 sub MakeMove {
 	my ($x, $y) = @_;
@@ -11,13 +18,16 @@ sub MakeMove {
 		return 0;
 	}
 
-	if ($GameBoard[$x][$y] != 0) {
+	#my $coord = $x.$y."";
+	#print "Coord: $coord\n";
+	#my $val = $GB{'00'};
+	my $val = $GameBoard[$x][$y];
+	print "On val: $val\n";
+	if ($val != 0) {
 		return 0;
 	} else {
-		my @tl = @GameBoard[$x];
-		print $tl;
-		#splice(@GameBoard, )
-		$GameBoard[$x][$y] = 1;
+		my @ta = $GameBoard[$x];
+		dump @ta;
 		return 1;
 	}
 
@@ -26,13 +36,13 @@ sub MakeMove {
 
 # Print_grid(@name)
 sub Print_grid {
+	dump @GameBoard;
     print "Board: \n";
-    $length = scalar @GameBoard;
-    $length += 1;
+    my $length = scalar @GameBoard;
     for(my $m = 0; $m <= $length; $m++) {
-	for(my $n = 0; $n <= $length; $n++) {
-	    print("$GameBoard[0][$m][$n] ");
-	}
+		for(my $n = 0; $n <= $length; $n++) {
+			print("$GameBoard[$m][$n] ");
+		}
 	print("\n")
     }
 }
