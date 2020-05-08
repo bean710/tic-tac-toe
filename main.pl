@@ -62,6 +62,10 @@ sub MakeMove {
 		return 0;
 	}
 
+	if ($player == 2) {
+
+	}
+
 	#my $coord = $x.$y."";
 	#print "Coord: $coord\n";
 	#my $val = $GB{'00'};
@@ -75,6 +79,107 @@ sub MakeMove {
 	}
 
 	return 0;
+}
+
+sub CheckSetPlayer {
+	my ($a, $b, $c) = @_;
+
+	print "Checking: $a$b$c\n";
+
+	if ($a == 1 and $b == 1 and $c == 0) {
+		return 2;
+	}
+	if ($a == 1 and $b == 0 and $c == 1) {
+		return 1;
+	}
+	if ($a == 0 and $b == 1 and $c == 1) {
+		return 0;
+	}
+
+	return -1;
+}
+
+sub CheckSetRobot {
+	my ($a, $b, $c) = @_;
+
+	print "Checking: $a$b$c\n";
+
+	if ($a == 2 and $b == 2 and $c == 0) {
+		return 2;
+	}
+	if ($a == 2 and $b == 0 and $c == 2) {
+		return 1;
+	}
+	if ($a == 0 and $b == 2 and $c == 2) {
+		return 0;
+	}
+
+	return -1;
+}
+
+sub MakeSmartRobotMove {
+	my $i = 0;
+
+	#Checking if robot can make a move to win
+	foreach $i (0..2) {
+		my $n = CheckSetRobot($GameBoard[$i][0], $GameBoard[$i][1], $GameBoard[$i][2]);
+		if ($n != -1) {
+			MakeMove($i, $n, 2);
+			return 1;
+		}
+	}
+
+	foreach $i (0..2) {
+		my $n = CheckSetRobot($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
+		if ($n != -1) {
+			MakeMove($i, $n, 2);
+			return 1;
+		}
+	}
+
+	my $n = CheckSetRobot($GameBoard[0][0], $GameBoard[1][1], $GameBoard[2][2]);
+	if ($n != -1) {
+		MakeMove($n, $n, 2);
+		return 1;
+	}
+
+	$n = CheckSetRobot($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
+	if ($n != -1) {
+		MakeMove(2 - $n, $n, 2);
+		return 1;
+	}
+
+	#Checking if robot can make move to block player
+	foreach $i (0..2) {
+		my $n = CheckSetPlayer($GameBoard[$i][0], $GameBoard[$i][1], $GameBoard[$i][2]);
+		if ($n != -1) {
+			MakeMove($i, $n, 2);
+			return 1;
+		}
+	}
+
+	foreach $i (0..2) {
+		my $n = CheckSetPlayer($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
+		if ($n != -1) {
+			MakeMove($i, $n, 2);
+			return 1;
+		}
+	}
+
+	$n = CheckSetPlayer($GameBoard[0][0], $GameBoard[1][1], $GameBoard[2][2]);
+	if ($n != -1) {
+		MakeMove($n, $n, 2);
+		return 1;
+	}
+
+	$n = CheckSetPlayer($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
+	if ($n != -1) {
+		MakeMove(2 - $n, $n, 2);
+		return 1;
+	}
+
+	#Make dumb move
+	return MakeRobotMove();
 }
 
 sub MakeRobotMove {
@@ -131,7 +236,7 @@ sub Main {
 		print "You made move at x:$x y:$y\n";
 		Print_grid();
 
-		MakeRobotMove();
+		MakeSmartRobotMove();
 		print "Computer moved: \n";
 		Print_grid();
 
