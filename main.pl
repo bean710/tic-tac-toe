@@ -7,6 +7,7 @@ use Data::Dump 'dump';
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 my $turn = 1;
 my $counter = 0;
+my $isGame = 1;
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -55,6 +56,16 @@ sub Check_diag {
 	else {
 		return 0; # Returns False
 	}
+}
+
+sub Check_all {
+	# Checks all
+	if (Check_rows(@GameBoard) == 1 || 
+			Check_cols(@GameBoard) == 1 || 
+			Check_diag(@GameBoard) == 1) {
+			$isGame = 0;
+			print "Someone WON!\n"
+		}
 }
 
 sub MakeMove {
@@ -112,7 +123,7 @@ sub Main {
 		$player2 = "X";
 	}
 
-	my $isGame = 1;
+	$isGame = 1;
 	while ($isGame) {
 		print "Enter x coordinate: ";
 		my $x = <STDIN>;
@@ -142,13 +153,7 @@ sub Main {
 		print "Made move at x:$x y:$y\n";
 
 		Print_grid();
-
-		if (Check_rows(@GameBoard) == 1 || 
-			Check_cols(@GameBoard) == 1 || 
-			Check_diag(@GameBoard) == 1) {
-			$isGame = 0;
-			print "Someone WON!\n"
-		}
+		Check_all();
 
 	}
 	print "Status: $isGame";
