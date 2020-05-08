@@ -66,9 +66,10 @@ sub Main {
 
 		print "Made move at x:$x y:$y\n";
 
-		Print_grid(@GameBoard);
+		Print_grid();
 	}
 	print "Status: $isGame";
 }
 
+Print_grid();
 Main();
