@@ -39,8 +39,8 @@ sub Print_grid {
 	dump @GameBoard;
     print "Board: \n";
     my $length = scalar @GameBoard;
-    for(my $m = 0; $m <= $length; $m++) {
-		for(my $n = 0; $n <= $length; $n++) {
+    for(my $m = 0; $m < $length; $m++) {
+		for(my $n = 0; $n < $length; $n++) {
 			print("$GameBoard[$m][$n] ");
 		}
 	print("\n")
