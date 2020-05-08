@@ -22,7 +22,7 @@ sub MakeMove {
 	#print "Coord: $coord\n";
 	#my $val = $GB{'00'};
 	my $val = $GameBoard[$x][$y];
-	print "On val: $val\n";
+	#print "On val: $val\n";
 	if ($val != 0) {
 		return 0;
 	} else {
