@@ -1,7 +1,14 @@
 #Main perl file
 use warnings;
+use strict;
+use Data::Dump 'dump';
 
-my @GameBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
+my %GB = {
+	'00' => 0, '01' => 0, '02' => 0,
+	'10' => 0, '11' => 0, '12' => 0,
+	'20' => 0, '21' => 0, '22' => 0
+};
 
 sub MakeMove {
 	my ($x, $y) = @_;
@@ -10,13 +17,16 @@ sub MakeMove {
 		return 0;
 	}
 
-	if ($GameBoard[$x][$y] != 0) {
+	#my $coord = $x.$y."";
+	#print "Coord: $coord\n";
+	#my $val = $GB{'00'};
+	my $val = $GameBoard[$x][$y];
+	print "On val: $val\n";
+	if ($val != 0) {
 		return 0;
 	} else {
-		my @tl = @GameBoard[$x];
-		print $tl;
-		#splice(@GameBoard, )
-		$GameBoard[$x][$y] = 1;
+		my @ta = $GameBoard[$x];
+		dump @ta;
 		return 1;
 	}
 
@@ -25,14 +35,7 @@ sub MakeMove {
 
 # Print_grid(@name)
 sub Print_grid {
-	print "Board: $GameBoard";
-    my @myarray = @{matrix};
-    for(my $m = 0; $m <= $#myarray; $m++) {
-		for(my $n = 0; $n <= $#myarray; $n++) {
-			print("$myarray[$m][$n] ");
-		}
-		print("\n");
-    }
+	dump @GameBoard;
 }
 
 sub Main {
