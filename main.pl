@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 #Main perl file
 use warnings;
 use strict;
