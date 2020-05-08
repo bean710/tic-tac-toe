@@ -5,6 +5,8 @@ use strict;
 use Data::Dump 'dump';
 
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
+my $turn = 1;
+my $counter = 0;
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -56,7 +58,7 @@ sub Check_diag {
 }
 
 sub MakeMove {
-	my ($x, $y) = @_;
+	my ($x, $y, $num) = @_;
 
 	if ($x < 0 or $x > 2 or $y < 0 or $y > 2) {
 		return 0;
@@ -70,7 +72,7 @@ sub MakeMove {
 	if ($val != 0) {
 		return 0;
 	} else {
-		$GameBoard[$x][$y] = 1;
+		$GameBoard[$x][$y] = $num;
 		return 1;
 	}
 
@@ -89,25 +91,48 @@ sub Print_grid {
     }
 }
 
+sub User_input {
+	print "Player 1, please choose a symbol 'X' or 'O'\n";
+	print "input: ";
+	my $player1 = <STDIN>; 
+	chomp $player1;
+	my $player2 = "";
+
+	return $player1;
+}
+
 sub Main {
-	# print "Player 1, please choose a symbol 'X' or 'O'"
-	# my $player1 = <STDIN>;
-
-	# if ($player1 == "X")
-
+	my $player1 = User_input();
+	my $player2 = "";
+	chomp $player1;
+	if ($player1 eq "X") {
+		$player2 = "O";
+	}
+	elsif ($player1 eq "O") {
+		$player2 = "X";
+	}
 
 	my $isGame = 1;
 	while ($isGame) {
 		print "Enter x coordinate: ";
 		my $x = <STDIN>;
-
+		my $ret = 0;
 		print "Enter y coordinate: ";
 		my $y = <STDIN>;
 
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
-		my $ret = MakeMove($x, $y);
+		if ($turn == 1)
+		{
+			$ret = MakeMove($x, $y, $turn);
+			$turn = 2;
+		}
+		elsif ($turn == 2)
+		{
+			$ret = MakeMove($x, $y, $turn);
+			$turn = 1;
+		}
 
 		if ($ret == 0) {
 			print "Invalid move! Try again.\n";
@@ -124,6 +149,7 @@ sub Main {
 			$isGame = 0;
 			print "Someone WON!\n"
 		}
+
 	}
 	print "Status: $isGame";
 }
