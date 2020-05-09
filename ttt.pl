@@ -26,6 +26,7 @@ my $player2 = "O";
 #	'20' => 0, '21' => 0, '22' => 0
 #};
 
+=pod
 sub MakeMove {
 	my ($x, $y, $player) = @_;
 
@@ -158,6 +159,8 @@ sub Print_grid {
 		print("\n")
     }
 }
+=cut
+
 
 sub Main {
 	print "VS CPU [1] or VS Player [2] or : ";
@@ -182,15 +185,15 @@ sub Main {
 		$y =~ s/[^0-9]*//g;
 
 		if ($choice == 1) {
-			$ret = MakeMove($y, $x, 1);
+			$ret = MakeMove($y, $x, 1, \@GameBoard);
 		}
 		elsif ($choice == 2) {
 			if ($turn == 1) {	
-			$ret = MakeMove($x, $y, $turn);	
+			$ret = MakeMove($x, $y, $turn, \@GameBoard);	
 			$turn = 2;	
 			}	
 			elsif ($turn == 2) {	
-				$ret = MakeMove($x, $y, $turn);	
+				$ret = MakeMove($x, $y, $turn, \@GameBoard);	
 				$turn = 1;	
 			}
 		}
@@ -201,10 +204,9 @@ sub Main {
 			next;
 		}
 		#print "You made move at x:$x y:$y\n";
-		Print_grid(\@GameBoard);
 
 		if ($choice == 1) {
-			MakeSmartRobotMove();
+			MakeSmartRobotMove(\@GameBoard);
 			print "Computer moved: \n";
 		}
 
