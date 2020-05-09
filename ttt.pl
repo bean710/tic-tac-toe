@@ -2,13 +2,16 @@
 #Main perl file
 use warnings;
 use strict;
-use Data::Dump 'dump';
 
 require 'Check_rows.pl';
 require 'CheckSetRobot.pl';
 require 'Check_cols.pl';
 require 'Check_diag.pl';
 require 'CheckSetPlayer.pl';
+require 'Print_grid.pl';
+require 'MakeSmartMove.pl';
+require 'MakeRobotMove.pl';
+require 'MakeMove.pl';
 
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 my $choice = 1;
@@ -194,18 +197,18 @@ sub Main {
 
 		if ($ret == 0) {
 			print "Invalid move! Try again.\n";
-			Print_grid();
+			Print_grid(\@GameBoard);
 			next;
 		}
 		#print "You made move at x:$x y:$y\n";
-		Print_grid();
+		Print_grid(\@GameBoard);
 
 		if ($choice == 1) {
 			MakeSmartRobotMove();
 			print "Computer moved: \n";
 		}
 
-		Print_grid();
+		Print_grid(\@GameBoard);
 		$counter = $counter + 1;
 
 		if (Check_rows(@GameBoard, $choice) == 1 || 
