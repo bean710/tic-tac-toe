@@ -68,7 +68,7 @@ sub Check_all {
 	if ($GameBoard[0][0] == 1){
 	    print "Player 1 won!\n";}
 
-	else{
+	elsif  ($GameBoard[0][0] == 2){
 	    print "Player 2 won!\n"
 	}
     }
@@ -79,7 +79,7 @@ sub Check_all {
 	if ($GameBoard[0][0] == 1){
 	    print "Player 1 won!\n";}
 
-	else{
+	elsif ($GameBoard[0][0] == 2){
 	    print "Player 2 won!\n"
 	}
     }
@@ -88,7 +88,7 @@ sub Check_all {
 if ($GameBoard[0][0] == 1){
 	    print "Player 1 won!\n";}
 
-	else{
+	elsif ($GameBoard[0][0] == 2){
 	    print "Player 2 won!\n"
 	}
 }
