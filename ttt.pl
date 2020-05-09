@@ -2,7 +2,6 @@
 #Main perl file
 use warnings;
 use strict;
-use Data::Dump 'dump';
 
 require 'Check_rows.pl';
 require 'CheckSetRobot.pl';
@@ -39,7 +38,7 @@ sub Main {
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
-		my $ret = MakeMove($y, $x, 1, \@GameBoard);
+		my $ret = MakeMove($x, $y, 1, \@GameBoard);
 
 		if ($ret == 0) {
 			print "Invalid move! Try again.\n";
