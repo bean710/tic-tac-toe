@@ -1,5 +1,6 @@
 Tic-Tac-Toe
 ---
+Read more [here!](https://bean710.github.io/tic-tac-toe/)
 
 How to Run It:
 =====
