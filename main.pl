@@ -4,56 +4,18 @@ use warnings;
 use strict;
 use Data::Dump 'dump';
 
+require 'Check_rows.pl';
+require 'CheckSetRobot.pl';
+require 'Check_cols.pl';
+require 'Check_diag.pl';
+require 'CheckSetPlayer.pl';
+
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
 #	'20' => 0, '21' => 0, '22' => 0
 #};
-
-sub Check_cols {
-	# Checks if there's a match for rows
-
-	my @myarray = @_;
-	for (my $i = 0; $i < 3; $i++) {
-		if (($myarray[0][$i] == $myarray[1][$i]) &&
-			($myarray[1][$i] == $myarray[2][$i]) && $myarray[0][$i] != 0) {
-				return 1; # Returns True
-		}
-	}
-	return 0; # Returns False
-}
-
-sub Check_rows {
-	# Checks if there's a match for cols
-
-	my @myarray = @_;
-	for (my $i = 0; $i < 3; $i++) {
-		if (($myarray[$i][0] == $myarray[$i][1]) &&
-			($myarray[$i][1] == $myarray[$i][2]) && $myarray[$i][0] != 0) {
-				return 1; # Returns True
-		}
-	}
-	return 0; # Returns False
-}
-
-sub Check_diag {
-	# Checks if there's a match for diags
-
-	my @myarray = @_;
-
-	if (($myarray[0][0] == $myarray[1][1]) &&
-		($myarray[1][1] == $myarray[2][2]) && $myarray[0][0] != 0) {
-			return 1; # Returns True
-		}
-	elsif (($myarray[0][2] == $myarray[1][1]) &&
-		($myarray[1][1] == $myarray[2][0]) && $myarray[0][2] != 0) {
-			return 1; # Returns True
-		}
-	else {
-		return 0; # Returns False
-	}
-}
 
 sub MakeMove {
 	my ($x, $y, $player) = @_;
@@ -81,40 +43,15 @@ sub MakeMove {
 	return 0;
 }
 
-sub CheckSetPlayer {
-	my ($a, $b, $c) = @_;
-
-	#print "Checking: $a$b$c\n";
-
-	if ($a == 1 and $b == 1 and $c == 0) {
-		return 2;
-	}
-	if ($a == 1 and $b == 0 and $c == 1) {
-		return 1;
-	}
-	if ($a == 0 and $b == 1 and $c == 1) {
-		return 0;
-	}
-
-	return -1;
-}
-
-sub CheckSetRobot {
-	my ($a, $b, $c) = @_;
-
-	#print "Checking: $a$b$c\n";
-
-	if ($a == 2 and $b == 2 and $c == 0) {
-		return 2;
-	}
-	if ($a == 2 and $b == 0 and $c == 2) {
-		return 1;
-	}
-	if ($a == 0 and $b == 2 and $c == 2) {
-		return 0;
-	}
-
-	return -1;
+sub Print_grid {
+    print "Board: \n";
+    my $length = scalar @GameBoard;
+    for(my $m = 0; $m < $length; $m++) {
+		for(my $n = 0; $n < $length; $n++) {
+			print("$GameBoard[$m][$n] ");
+		}
+		print("\n")
+    }
 }
 
 sub MakeSmartRobotMove {
@@ -195,18 +132,6 @@ sub MakeRobotMove {
 	return 0;
 }
 
-# Print_grid(@name)
-sub Print_grid {
-    print "Board: \n";
-    my $length = scalar @GameBoard;
-    for(my $m = 0; $m < $length; $m++) {
-		for(my $n = 0; $n < $length; $n++) {
-			print("$GameBoard[$m][$n] ");
-		}
-		print("\n")
-    }
-}
-
 sub Main {
 	# print "Player 1, please choose a symbol 'X' or 'O'"
 	# my $player1 = <STDIN>;
@@ -249,6 +174,5 @@ sub Main {
 	}
 	print "Status: $isGame";
 }
-
 # Print_grid();
 Main();
