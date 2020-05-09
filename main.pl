@@ -8,6 +8,8 @@ my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 my $turn = 1;
 my $counter = 0;
 my $isGame = 1;
+my $player1 = "";
+my $player2 = "";
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -214,7 +216,14 @@ sub Print_grid {
     my $length = scalar @GameBoard;
     for(my $m = 0; $m < $length; $m++) {
 		for(my $n = 0; $n < $length; $n++) {
-			print("$GameBoard[$m][$n] ");
+			my $gbr = $GameBoard[$m][$n];
+			if ($gbr == 1){
+				print "$player1 ";
+			} elsif ($gbr == 2) {
+				print "$player2 ";
+			} else {
+				print "* ";
+			}
 		}
 		print("\n")
     }
@@ -234,8 +243,8 @@ sub Main {
 	my $pnum = <STDIN>;
 	chomp $pnum;
 	if ($pnum == 2) {
-		my $player1 = User_input();
-		my $player2 = "";
+		$player1 = User_input();
+		$player2 = "";
 		chomp $player1;
 		if ($player1 eq "X") {
 			$player2 = "O";
@@ -248,6 +257,7 @@ sub Main {
 		}
 	}
 
+	Print_grid();
 	$isGame = 1;
 	while ($isGame) {
 		my $ret = 1;
@@ -302,5 +312,4 @@ sub Main {
 	print "Status: $isGame";
 }
 
-# Print_grid();
 Main();
