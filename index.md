@@ -371,18 +371,7 @@ A function was needed to determine where to put the next piece. We did not just 
 
 At this point in the code, either player 2 or the computer has made a move. Each time that the while loop continues and we get back to this point in the code, a check will be made to see if there are any 3-in-a-row connections to determine if there is a winner and to exit the game. A counter is also in place to ensure that if 9 moves have been made and there are no 3-in-a-row connections, then the player can exit out of the loop because the game will end in a draw.
 
-| * \ 
-| * \ 
-| * \ 
-| * \  
-| * \ 
-|     Insert more text here
-| * \
-| * \
-| * \
-| * \
-| * \
-
+We hope you don't get to that point, and that you win though.
 
 ---
 ## Conclusion
@@ -393,7 +382,7 @@ Our takes on the language and project itself:
 
 **Bob**: I found Perl to be very similar to bash scripting in terms of syntax. I was surprised the ways in which we were able to use Perl for this project
 
-**Christine**: Perl is like lit. 
+**Christine**: Perl is pretty awesome, I would totally love to see how this is used in other ways - DevOps Queen in training.
 
 **Kevin**: Learning Perl is exiting! Learning a new programming lang gets easier the more programming languages you discover.
 
@@ -402,16 +391,12 @@ Our takes on the language and project itself:
 **Raudo**: Perl is kind of cool, not sure if i like it.
 
 
-
 While Perl would not have been the first language that comes to mind for us to write a Tic Tac Toe game,
 we found that the support of object oriented procedure along with the ease of using text files made this
 challenge both simple and powerful. 
 
 If you haven’t coded in Perl before, we encourage you to take this challenge upon yourselves
 and maybe even see if you can explore an alternative way that works best for you!
-
-
-
 
 ---
 
