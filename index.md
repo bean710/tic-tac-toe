@@ -44,17 +44,27 @@ because that connects them to 4 possible connections in just one spot).
 ## Demo
 
 **List of files**:
-CheckSetPlayer.pl 
-CheckSetRobot.pl 
-Check_cols.pl 
-Check_diag.pl 
-Check_rows.pl 
-MakeMove.pl 
-MakeRobotMove.pl 
-MakeSmartMove.pl 
-Print_grid.pl
-compile.sh 
-ttt.pl 
+
+* CheckSetPlayer.pl 
+
+* CheckSetRobot.pl 
+
+* Check_cols.pl 
+
+* Check_diag.pl 
+
+* Check_rows.pl 
+
+* MakeMove.pl 
+
+* MakeRobotMove.pl 
+
+* MakeSmartMove.pl 
+
+* Print_grid.pl
+
+* ttt.pl 
+
 
 ### Getting Started
 
@@ -316,6 +326,50 @@ for $i (@a) {
 
 Notice that the variable i automatically interpolates. 
 
+
+While we were getting started with learning a whole new langauge before diving into creating this game,
+we knew we were going to get our hands dirty with the amount of heavy lifting that we're going to require our functions to do.
+As novices to the language, we started off with one huge gigantic ```main.pl``` file but through lots of trial and error, were 
+able to break that up into the associatively named files. 
+
+In order for our main file, called ```ttt.pl``` to "see" functions in other files, we had to use ```require``` which works much like import does in Python. Here's a block of our ```ttt.pl``` file to show just how many files we imported on. The scope of those variables now lie beyond just where they are written.
+
+```
+require 'Check_rows.pl';
+require 'CheckSetRobot.pl';
+require 'Check_cols.pl';
+require 'Check_diag.pl';
+require 'CheckSetPlayer.pl';
+require 'Print_grid.pl';
+require 'MakeSmartMove.pl';
+require 'MakeRobotMove.pl';
+require 'MakeMove.pl';
+```
+Semicolons are used as seperators between statements. Though the very last line of your code can omit the semicolon, it is considered best practice to include it. This also prevents any errors that may occur if you make any edits in the future.
+
+Perl supports 3 different data types. Scalar, array, hash.
+We required multiple variables that would handle our grid/GameBoard, which player you are, who's turn it is, the number of moves made (up to 9), if the game is still valid, and the 'X' and '0' symbols that would be placed on the grid.
+
+As if this language was made for this project of creating a Tic-Tac-Toe game, we found that with 3 variables in Perl, one of them was an array and we needed ~~an array~~ a 2D array for our grid. That was initialized as ```my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);``` while the other variables, which are scalar, were initialized as ```my $counter = 0;```.
+
+Since this is a game, we wanted to implement the functionality of "turns" and "players". It's fairly straightforward; you are 
+player 1 and you have the option to choose to play against the computer or locally against a friend. We would need to both prompt the user what they want and from that choice, enter into a while loop that would commence until someone has one or we reach a draw. We captured the value of the choice the user enters into the standard input:
+```
+VS CPU [1] or VS Player [2] or :
+```
+as the variable ```$choice``` and as long as it is either 1 (playing against CPU) or 2 (playing against a friend), it is valid and kicks off the while loop to start the game.
+
+If you've played Tic-Tac-Toe before, you know there are a few rules. You have to make a move within the designated grid,
+you cannot put your piece where another piece already is (yes, even if its your own), and someone either wins if they get 3-in-a-row or there's a draw if the board is all filled up. Now we would just need to broaden that a bit and add a few more edge cases (never trust the user!!!) so that we can have a game that behaves and reacts predictably. 
+
+Since we decided to structure the game so that the user is given second and third and even more chances to input more values, we needed to capture the return value of invalid attempts while still being in the while loop. Within the scope of our ```sub Main``` function, we declared a ```$ret``` variable. If running the function ```MakeMove``` on the user's input returns an invalid value of 0, the output ```Invalid move! Try again.``` would be shown and the game commences with no changes. The user then has a chance to input a valid coordinate.
+
+Once the user has put in a valid coordinate, either the computer or the 2nd player goes next. Earlier, when the variable ```$choice``` was used, that value will determine whether another prompt is given to the players or if the machine will automatically make a move. 
+
+
+A function was needed to determine where to put the next piece. We did not just want to have the machine put their piece just anywhere. We wanted to give the user a real challenge. The function ```MakeSmartRobotMove``` would prioritize making leeway to win, then obstructing the other user from winning, and then placing a piece in a random spot if neither of the above are the case in that level of importance. 
+
+At this point in the code, either player 2 or the computer has made a move. Each time that the while loop continues and we get back to this point in the code, a check will be made to see if there are any 3-in-a-row connections to determine if there is a winner and to exit the game. A counter is also in place to ensure that if 9 moves have been made and there are no 3-in-a-row connections, then the player can exit out of the loop because the game will end in a draw.
 
 | * \ 
 | * \ 
