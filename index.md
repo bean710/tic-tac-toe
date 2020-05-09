@@ -51,34 +51,129 @@ CheckSetRobot.pl | some text here
 Check_cols.pl | some text here
 Check_diag.pl | some text here
 Check_rows.pl | some text here
+MakeMove.pl | some text here
+MakeRobotMove.pl | some text here
+MakeSmartMove.pl | some text here
+Print_grid.pl | some text here
 main.pl | some text here
+compile.sh | some text here
+ttt.pl | some text here
+
+### Getting Started
 
 
-You can run your Perl files, ```example.pl``` in 2 ways:
+You can run your Perl file, ```ttt.pl``` in 2 ways:
 
 
 ```
-tic-tac-toe$ perl example.pl
+tic-tac-toe$ perl ttt.pl
 tic-tac-toe$
 ```
 
 ```
-tic-tac-toe$ ./example.pl
+tic-tac-toe$ ./ttt.pl
 tic-tac-toe$
 ```
 
-| * \ 
-| * \ 
-| * \ 
-| * \  
-| * \ 
-|     Insert more text here
-| * \
-| * \
-| * \
-| * \
-| * \
+### Choose how you want to play
+You will be prompted with whether you want to play against the computer or another (locally):
+```
+tic-tac-toe$: ./ttt.pl
+VS CPU [1] or VS Player [2] or :
+```
 
+### Playing against CPU 
+Enter 1 and hit RETURN to play against the computer. You will be prompted to enter the coordinates to go first.
+```
+tic-tac-toe$: ./ttt.pl
+VS CPU [1] or VS Player [2] or : 1
+Enter x coordinate:
+Enter y coordinate:
+```
+
+### First move
+```
+Enter x coordinate: 0
+Enter y coordinate: 0
+Made move 0, 1
+Computer moved:
+Board:
+1 2 0
+0 0 0
+0 0 0
+```
+You will see that you are the #1 and the computer makes a move as #2 on our grid. 
+You will be prompted to make another coordinate:
+```
+Enter x coordinate: 0
+Enter y coordinate: 2
+Made move 1, 0
+Computer moved:
+Board:
+1 2 0
+2 0 0
+1 0 0
+```
+And again, the computer makes a move.
+```
+Enter x coordinate: 1
+Enter y coordinate: 1
+Made move 2, 2
+Computer moved:
+Board:
+1 2 0
+2 1 0
+1 0 2
+```
+But wait! The computer is smart and blocks you! 
+
+### Invalid Inputs 1
+```
+Enter x coordinate: 5
+Enter y coordinate: 9
+Invalid move! Try again.
+Board:
+1 2 0
+2 1 0
+1 0 2
+```
+You also can't make coordinates that are outside of the grid as shown above.
+
+### Invalid Inputs 2
+```
+Enter x coordinate: 1
+Enter y coordinate: 1
+Invalid move! Try again.
+Board:
+1 2 0
+2 1 0
+1 0 2
+```
+You also can't try to put your piece on a grid that is already taken up
+
+### Invalid Inputs 3
+```
+Enter x coordinate: h
+Enter y coordinate: n
+Invalid move! Try again.
+Board:
+1 2 0
+2 1 0
+1 0 2
+```
+And lastly, you can only input numbers.
+
+### Someone won!
+```
+Enter x coordinate: 2
+Enter y coordinate: 0
+Made move 2, 0
+Board:
+1 2 1
+2 1 0
+1 0 2
+Player 1 WON!
+```
 
 ---
 ## How to Write Tic Tac Toe in Perl
@@ -203,6 +298,7 @@ Our takes on the language and project itself:
 Ben: Perl is that wacky uncle
 Bob:
 Christine: Perl is like lit. 
+Kevin: 
 Kyle: The data types scare me.
 Raudo: Perl is kind of cool, not sure if i like it.
 
