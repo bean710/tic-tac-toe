@@ -44,20 +44,17 @@ because that connects them to 4 possible connections in just one spot).
 ## Demo
 
 List of files:
-| File Name | Description |
---- | --- |
-CheckSetPlayer.pl | some text here
-CheckSetRobot.pl | some text here
-Check_cols.pl | some text here
-Check_diag.pl | some text here
-Check_rows.pl | some text here
-MakeMove.pl | some text here
-MakeRobotMove.pl | some text here
-MakeSmartMove.pl | some text here
-Print_grid.pl | some text here
-main.pl | some text here
-compile.sh | some text here
-ttt.pl | some text here
+CheckSetPlayer.pl 
+CheckSetRobot.pl 
+Check_cols.pl 
+Check_diag.pl 
+Check_rows.pl 
+MakeMove.pl 
+MakeRobotMove.pl 
+MakeSmartMove.pl 
+Print_grid.pl
+compile.sh 
+ttt.pl 
 
 ### Getting Started
 
@@ -87,55 +84,54 @@ Enter 1 and hit RETURN to play against the computer. You will be prompted to ent
 ```
 tic-tac-toe$: ./ttt.pl
 VS CPU [1] or VS Player [2] or : 1
+Board:
+   |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
 Enter x coordinate:
-Enter y coordinate:
+Enter y coordinate
 ```
 
 ### First move
 ```
 Enter x coordinate: 0
 Enter y coordinate: 0
-Made move 0, 1
-Computer moved:
 Board:
-1 2 0
-0 0 0
-0 0 0
+ X | O |
+---+---+---
+   |   |
+---+---+---
+   |   |
 ```
-You will see that you are the #1 and the computer makes a move as #2 on our grid. 
+You will see that you are the X and the computer makes a move as 0 on our grid. 
 You will be prompted to make another coordinate:
-```
-Enter x coordinate: 0
-Enter y coordinate: 2
-Made move 1, 0
-Computer moved:
-Board:
-1 2 0
-2 0 0
-1 0 0
-```
-And again, the computer makes a move.
 ```
 Enter x coordinate: 1
 Enter y coordinate: 1
-Made move 2, 2
-Computer moved:
 Board:
-1 2 0
-2 1 0
-1 0 2
+ X | O |
+---+---+---
+   | X |
+---+---+---
+   |   | O
+ 
 ```
+And again, the computer makes a move.
 But wait! The computer is smart and blocks you! 
 
 ### Invalid Inputs 1
 ```
 Enter x coordinate: 5
 Enter y coordinate: 9
-Invalid move! Try again.
 Board:
-1 2 0
-2 1 0
-1 0 2
+ X | O |
+---+---+---
+   | X |
+---+---+---
+   |   | O
+Invalid move! Try again.
 ```
 You also can't make coordinates that are outside of the grid as shown above.
 
@@ -143,11 +139,13 @@ You also can't make coordinates that are outside of the grid as shown above.
 ```
 Enter x coordinate: 1
 Enter y coordinate: 1
-Invalid move! Try again.
 Board:
-1 2 0
-2 1 0
-1 0 2
+ X | O |
+---+---+---
+   | X |
+---+---+---
+   |   | O
+Invalid move! Try again.
 ```
 You also can't try to put your piece on a grid that is already taken up
 
@@ -155,25 +153,45 @@ You also can't try to put your piece on a grid that is already taken up
 ```
 Enter x coordinate: h
 Enter y coordinate: n
-Invalid move! Try again.
 Board:
-1 2 0
-2 1 0
-1 0 2
+ X | O |
+---+---+---
+   | X |
+---+---+---
+   |   | O
+Invalid move! Try again.
 ```
 And lastly, you can only input numbers.
 
 ### Someone won!
+Let's make some more moves.
+```
+Enter x coordinate: 0
+Enter y coordinate: 2
+Board:
+ X | O |
+---+---+---
+ O | X |
+---+---+---
+ X |   | O
+```
+
 ```
 Enter x coordinate: 2
 Enter y coordinate: 0
-Made move 2, 0
 Board:
-1 2 1
-2 1 0
-1 0 2
-Player 1 WON!
+ X | O | X
+---+---+---
+ O | X | 
+---+---+---
+ X |   | O
+ Player 1 Won!
 ```
+If you are playing against a player 2, the format is similar. The only big difference
+is that instead of the computer automatically (and quite cunningly) makes the moves, 
+the screen prompts you to input coordinates manually again for player 2 (whether that
+is for your friend or if you are playing by yourself).
+
 
 ---
 ## How to Write Tic Tac Toe in Perl
@@ -184,8 +202,8 @@ a script that we write on Unix can be executed without any alterations on Window
 as long as we’re not using features that are available in the one environment and not the other. 
 
 
-We have embedded into that string, $_____ and $_____,
-and those are automatically interpolated. Perl does this naturally, unlike in Python or C 
+We have embedded into that string multiple variables throughout our files and
+those are all automatically interpolated. Perl does this naturally, unlike in Python or C 
 so you can just include variables in a string and the result will be their values. 
 
 ### In C:
@@ -295,12 +313,19 @@ Notice that the variable i automatically interpolates.
 ## Conclusion
 
 Our takes on the language and project itself: 
-Ben: Perl is that wacky uncle
-Bob:
+
+Ben: Perl is that wacky uncle.
+
+Bob: I found Perl to be very similar to bash scripting in terms of syntax. I was surprised the ways in which we were able to use Perl for this project
+
 Christine: Perl is like lit. 
-Kevin: 
+
+Kevin: Learning Perl is exiting! Learning a new programming lang gets easier the more programming languages you discover.
+
 Kyle: The data types scare me.
+
 Raudo: Perl is kind of cool, not sure if i like it.
+
 
 
 While Perl would not have been the first language that comes to mind for us to write a tic tac toe game,
