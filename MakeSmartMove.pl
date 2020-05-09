@@ -14,7 +14,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetRobot($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2, \@GameBoard);
+			MakeMove($n, $i, 2, \@GameBoard);
 			return 1;
 		}
 	}
@@ -43,7 +43,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetPlayer($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2, \@GameBoard);
+			MakeMove($n, $i, 2, \@GameBoard);
 			return 1;
 		}
 	}
