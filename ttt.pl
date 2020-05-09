@@ -188,11 +188,10 @@ sub Main {
 
 		Print_grid();
 
-		if (Check_rows(@GameBoard) == 1 || 
-			Check_cols(@GameBoard) == 1 || 
-			Check_diag(@GameBoard) == 1) {
+		if (Check_rows(@GameBoard, $choice) == 1 || 
+			Check_cols(@GameBoard, $choice) == 1 || 
+			Check_diag(@GameBoard, $choice) == 1) {
 			$isGame = 0;
-			print "Someone WON!\n"
 		}
 	}
 	print "Status: $isGame";
