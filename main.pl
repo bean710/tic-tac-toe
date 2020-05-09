@@ -21,6 +21,7 @@ sub Check_cols {
 	for (my $i = 0; $i < 3; $i++) {
 		if (($myarray[0][$i] == $myarray[1][$i]) &&
 			($myarray[1][$i] == $myarray[2][$i]) && $myarray[0][$i] != 0) {
+				print "Player" . $myarray[2][$i] . " WON!\n";
 				return 1; # Returns True
 		}
 	}
@@ -34,6 +35,7 @@ sub Check_rows {
 	for (my $i = 0; $i < 3; $i++) {
 		if (($myarray[$i][0] == $myarray[$i][1]) &&
 			($myarray[$i][1] == $myarray[$i][2]) && $myarray[$i][0] != 0) {
+				print "Player" . $myarray[$i][2] . " WON!\n";
 				return 1; # Returns True
 		}
 	}
@@ -47,10 +49,12 @@ sub Check_diag {
 
 	if (($myarray[0][0] == $myarray[1][1]) &&
 		($myarray[1][1] == $myarray[2][2]) && $myarray[0][0] != 0) {
+			print "Player" . $myarray[2][2] . " WON!\n";
 			return 1; # Returns True
 		}
 	elsif (($myarray[0][2] == $myarray[1][1]) &&
 		($myarray[1][1] == $myarray[2][0]) && $myarray[0][2] != 0) {
+			print "Player" . $myarray[2][0] . " WON!\n";
 			return 1; # Returns True
 		}
 	else {
@@ -61,37 +65,40 @@ sub Check_diag {
 sub Check_all {
 	# Checks all
 
-    if (Check_rows(@GameBoard) == 1)
+    if (Check_rows(@GameBoard) == 1 or
+		Check_cols(@GameBoard) == 1 or
+		Check_diag(@GameBoard) == 1)
     {
-	if ($GameBoard[0][0]==1 or $GameBoard[1][0]==1 or $GameBoard[2][0]==1)
-	{$isGame = 0;
-	 print "Player 1 WON!\n"}
+	# if ($GameBoard[0][0]==1 and $GameBoard[1][0]==1 and $GameBoard[2][0]==1)
+	# {$isGame = 0;
+	#  print "Player 1 WON!\n"}
 
-	elsif ($GameBoard[0][0]==2 or $GameBoard[1][0]==2 or $GameBoard[2][0]==2)
-	{$isGame = 0;
-	 print "Player 2 WON!\n"}
-    }
+	# elsif ($GameBoard[0][0]==2 and $GameBoard[1][0]==2 and $GameBoard[2][0]==2)
+	# {$isGame = 0;
+	#  print "Player 2 WON!\n"}
+    # }
 
-    elsif (Check_cols(@GameBoard) == 1)
-    {
-	if ($GameBoard[0][0]==1 or $GameBoard[0][1]==1 or $GameBoard[0][2]==1)
-	{$isGame = 0;
-	 print "Player 1 WON!\n"}
+    # elsif (Check_cols(@GameBoard) == 1)
+    # {
+	# if ($GameBoard[0][0]==1 and $GameBoard[0][1]==1 and $GameBoard[0][2]==1)
+	# {$isGame = 0;
+	#  print "Player 1 WON!\n"}
 
-	elsif ($GameBoard[0][0]==2 or $GameBoard[0][1]==2 or $GameBoard[0][2]==2)
-	{$isGame = 0;
-	 print "Player 2 WON!\n"}
-    }
+	# elsif ($GameBoard[0][0]==2 and $GameBoard[0][1]==2 and $GameBoard[0][2]==2)
+	# {$isGame = 0;
+	#  print "Player 2 WON!\n"}
+    # }
 
-    elsif (Check_diag(@GameBoard) == 1) 
-    {
-	if ($GameBoard[0][0]==1 or $GameBoard[1][1]==1 or $GameBoard[2][2]==1)
-	{$isGame = 0;
-	 print "Player 1 WON!\n"}
+    # elsif (Check_diag(@GameBoard) == 1) 
+    # {
+	# if ($GameBoard[0][0]==1 and $GameBoard[1][1]==1 and $GameBoard[2][2]==1)
+	# {$isGame = 0;
+	#  print "Player 1 WON!\n"}
 
-	elsif ($GameBoard[0][0]==2 or $GameBoard[1][1]==2 or $GameBoard[2][2]==2)
-	{$isGame = 0;
-	 print "Player 2 WON!\n"}
+	# elsif ($GameBoard[0][0]==2 and $GameBoard[1][1]==2 and $GameBoard[2][2]==2)
+	# {$isGame = 0;
+	#  print "Player 2 WON!\n"}
+	$isGame = 0;
     }
 
     elsif ($counter == 9)
