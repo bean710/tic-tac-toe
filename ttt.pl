@@ -11,6 +11,8 @@ require 'Check_diag.pl';
 require 'CheckSetPlayer.pl';
 
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
+my $choice = 1;
+my $turn = 1;
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -133,10 +135,8 @@ sub MakeRobotMove {
 }
 
 sub Main {
-	# print "Player 1, please choose a symbol 'X' or 'O'"
-	# my $player1 = <STDIN>;
-
-	# if ($player1 == "X")
+	print "VS CPU [1] or VS Player [2] or : ";
+	my $choice = <STDIN>;
 
 
 	my $isGame = 1;
@@ -152,6 +152,15 @@ sub Main {
 
 		my $ret = MakeMove($y, $x, 1);
 
+		if ($turn == 1) {	
+			$ret = MakeMove($x, $y, $turn);	
+			$turn = 2;	
+		}	
+		elsif ($turn == 2) {	
+			$ret = MakeMove($x, $y, $turn);	
+			$turn = 1;	
+		}
+
 		if ($ret == 0) {
 			print "Invalid move! Try again.\n";
 			Print_grid();
@@ -161,8 +170,11 @@ sub Main {
 		print "You made move at x:$x y:$y\n";
 		Print_grid();
 
-		MakeSmartRobotMove();
-		print "Computer moved: \n";
+		if ($choice == 1) {
+			MakeSmartRobotMove();
+			print "Computer moved: \n";
+		}
+
 		Print_grid();
 
 		if (Check_rows(@GameBoard) == 1 || 
