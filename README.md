@@ -3,6 +3,8 @@ Tic-Tac-Toe
 
 How to Run It:
 =====
+If you have perl installed, just run `perl ttt.pl`
+
 If you have a compatible system, you can just use one of the precompiled
 binaries.
 - MacOS (Tested on 10.15): MacOS_ttt
