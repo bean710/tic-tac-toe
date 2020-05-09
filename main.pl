@@ -64,8 +64,11 @@ sub Check_all {
 			Check_cols(@GameBoard) == 1 || 
 			Check_diag(@GameBoard) == 1) {
 			$isGame = 0;
-			print "Someone WON!\n"
+			print "Someone WON!\n";
+			return 1;
 		}
+
+	return 0;
 }
 
 sub MakeMove {
@@ -210,13 +213,30 @@ sub MakeRobotMove {
 
 # Print_grid(@name)
 sub Print_grid {
+	print "\033[0;0H";
     print "Board: \n";
     my $length = scalar @GameBoard;
     for(my $m = 0; $m < $length; $m++) {
 		for(my $n = 0; $n < $length; $n++) {
-			print("$GameBoard[$m][$n] ");
+			if ($n != 0) {
+				print "| ";
+			} else {
+				print " ";
+			}
+			my $out = " ";
+			my $gbr = $GameBoard[$m][$n];
+			if ($gbr == 1)
+			{
+				$out = "X";
+			} elsif ($gbr == 2) {
+				$out = "O";
+			}
+			print("$out ");
 		}
-		print("\n")
+		print("\n");
+		if ($m != 2){
+			print "---+---+---\n";
+		}
     }
 }
 
@@ -233,6 +253,8 @@ sub Main {
 	print "How many players? (1 or 2): ";
 	my $pnum = <STDIN>;
 	chomp $pnum;
+	print "\033[2J";    #clear the screen
+	print "\033[0;0H"; #jump to 0,0
 	if ($pnum == 2) {
 		my $player1 = User_input();
 		my $player2 = "";
@@ -248,6 +270,7 @@ sub Main {
 		}
 	}
 
+	Print_grid();
 	$isGame = 1;
 	while ($isGame) {
 		my $ret = 1;
@@ -256,10 +279,10 @@ sub Main {
 		if (($pnum == 2) or $turn == 1) {
 			print "Player $turn\'s turn\n";
 			print "Enter x coordinate: ";
-			$x = <STDIN>;
+			$y = <STDIN>;
 			$ret = 0;
 			print "Enter y coordinate: ";
-			$y = <STDIN>;
+			$x = <STDIN>;
 
 			$x =~ s/[^0-9]*//g;
 			$y =~ s/[^0-9]*//g;
@@ -296,11 +319,11 @@ sub Main {
 		#print "You made move at x:$x y:$y\n";
 		Print_grid();
 
-		Check_all();
+		if (Check_all()) {
+			$isGame = 0;
+		}
 
 	}
-	print "Status: $isGame";
 }
 
-# Print_grid();
 Main();
