@@ -76,7 +76,7 @@ sub MakeMove {
 	}
 
 	if ($player == 2) {
-		print "Made move $x, $y\n";
+		print "Computer made move $x, $y\n";
 	}
 
 	#my $coord = $x.$y."";
@@ -145,7 +145,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetRobot($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2);
+			MakeMove($n, $i, 2);
 			return 1;
 		}
 	}
@@ -174,7 +174,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetPlayer($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2);
+			MakeMove($n, $i, 2);
 			return 1;
 		}
 	}
@@ -256,10 +256,10 @@ sub Main {
 		if (($pnum == 2) or $turn == 1) {
 			print "Player $turn\'s turn\n";
 			print "Enter x coordinate: ";
-			$x = <STDIN>;
+			$y = <STDIN>;
 			$ret = 0;
 			print "Enter y coordinate: ";
-			$y = <STDIN>;
+			$x = <STDIN>;
 
 			$x =~ s/[^0-9]*//g;
 			$y =~ s/[^0-9]*//g;
