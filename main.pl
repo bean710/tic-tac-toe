@@ -75,7 +75,9 @@ sub MakeMove {
 		return 0;
 	}
 
-	#print "Making move $x $y\n";
+	if ($player == 2) {
+		print "Made move $x, $y\n";
+	}
 
 	#my $coord = $x.$y."";
 	#print "Coord: $coord\n";
@@ -156,7 +158,7 @@ sub MakeSmartRobotMove {
 
 	$n = CheckSetRobot($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
 	if ($n != -1) {
-		MakeMove(2 - $n, $n, 2);
+		MakeMove($n, 2 - $n, 2);
 		return 1;
 	}
 
@@ -185,7 +187,7 @@ sub MakeSmartRobotMove {
 
 	$n = CheckSetPlayer($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
 	if ($n != -1) {
-		MakeMove(2 - $n, $n, 2);
+		MakeMove($n, 2 - $n, 2);
 		return 1;
 	}
 
