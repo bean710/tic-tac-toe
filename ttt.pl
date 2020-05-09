@@ -52,7 +52,7 @@ sub Main {
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
-		$ret = MakeMove($y, $x, 1, \@GameBoard);
+		$ret = MakeMove($y, $x, $turn, \@GameBoard);
 
 		if ($ret == 0) {
 			Print_grid(\@GameBoard);
