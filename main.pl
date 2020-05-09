@@ -60,12 +60,43 @@ sub Check_diag {
 
 sub Check_all {
 	# Checks all
-	if (Check_rows(@GameBoard) == 1 || 
-			Check_cols(@GameBoard) == 1 || 
-			Check_diag(@GameBoard) == 1) {
-			$isGame = 0;
-			print "Someone WON!\n"
-		}
+
+    if (($GameBoard[0][0] == $GameBoard[0][1] && $GameBoard[0][1]==$GameBoard[0][2]) or
+            ($GameBoard[1][0] == $GameBoard[1][1] && $GameBoard[1][1]==$GameBoard[1][2]) or         
+	($GameBoard[2][0] == $GameBoard[2][1] && $GameBoard[2][1]==$GameBoard[2][2]))           
+    {
+	if ($GameBoard[0][0] == 1){
+	    print "Player 1 won!\n";}
+
+	else{
+	    print "Player 2 won!\n"
+	}
+    }
+
+    elsif(($GameBoard[0][0] == $GameBoard[1][0] && $GameBoard[1][0]== $GameBoard[2][0]) or
+              ($GameBoard[0][1]== $GameBoard[1][1] && $GameBoard[1][1]== $GameBoard [2][1]) or
+	  ($GameBoard[0][2] == $GameBoard[1][2] && $GameBoard[1][2] == $GameBoard [2][2]))                                  {
+	if ($GameBoard[0][0] == 1){
+	    print "Player 1 won!\n";}
+
+	else{
+	    print "Player 2 won!\n"
+	}
+    }
+
+    elsif (($GameBoard[0][0] == $GameBoard[1][1] &&  $GameBoard[1][1]== $GameBoard[2][2]) or               ($GameBoard[2][0] == $GameBoard[1][1] &&  $GameBoard[1][1] == $GameBoard [0][2]))                                {
+if ($GameBoard[0][0] == 1){
+	    print "Player 1 won!\n";}
+
+	else{
+	    print "Player 2 won!\n"
+	}
+}
+
+	elsif ($counter == 9) {
+	    $isGame = 1;
+	    print "Draw\n";
+	}
 }
 
 sub MakeMove {
