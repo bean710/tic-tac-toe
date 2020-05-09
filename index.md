@@ -200,7 +200,7 @@ Notice that the variable i automatically interpolates.
 ## Conclusion
 
 Our takes on the language and project itself: 
-Ben:
+Ben: Perl is that wacky uncle
 Bob:
 Christine: Perl is like lit. 
 Kyle: The data types scare me.
