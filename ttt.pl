@@ -152,6 +152,9 @@ sub Main {
 
 		my $ret = MakeMove($y, $x, 1);
 
+		if ($choice == 1) {
+			my $ret = MakeMove($y, $x, 1);
+		}
 		if ($turn == 1) {	
 			$ret = MakeMove($x, $y, $turn);	
 			$turn = 2;	
