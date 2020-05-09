@@ -213,6 +213,7 @@ sub MakeRobotMove {
 
 # Print_grid(@name)
 sub Print_grid {
+	print "\033[2J";    #clear the screen
 	print "\033[0;0H";
     print "Board: \n";
     my $length = scalar @GameBoard;
