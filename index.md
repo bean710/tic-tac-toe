@@ -43,7 +43,7 @@ because that connects them to 4 possible connections in just one spot).
 ---
 ## Demo
 
-List of files:
+**List of files**:
 CheckSetPlayer.pl 
 CheckSetRobot.pl 
 Check_cols.pl 
@@ -71,6 +71,27 @@ tic-tac-toe$
 tic-tac-toe$ ./ttt.pl
 tic-tac-toe$
 ```
+If the above commands show errors, feel free to use a docker image to run this game. We wrote this in Perl 5 version 18 but 
+different users may have differebt versions altogether.
+
+
+Follow this step by step to run this game in our container. Ensure that you start in this local repo's directory.
+## Getting Started With Docker
+```
+tic-tac-toe$ sudo docker build .
+tic-tac-toe$ sudo docker images 
+REPOSITORY              TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+<none>                  <none>              8ed452f3d25c        About an hour ago    196.5 MB
+<none>                  <none>              78cc26347a1f        About an hour ago    196.5 MB
+ubuntu                  trusty              2a008d071fde        4 months ago         196.5 MB
+```
+Using the IMAGE ID of the docker image most recently created if successful, copy that ID and continue on:
+```
+sudo docker run -it <IMAGE ID>
+```
+And that's it! The game should start. Hint: to exit the game, ```CTRL + P + Q```.
+
+
 
 ### Choose how you want to play
 You will be prompted with whether you want to play against the computer or another (locally):
@@ -314,21 +335,21 @@ Notice that the variable i automatically interpolates.
 
 Our takes on the language and project itself: 
 
-Ben: Perl is that wacky uncle.
+**Ben**: Perl is that wacky uncle.
 
-Bob: I found Perl to be very similar to bash scripting in terms of syntax. I was surprised the ways in which we were able to use Perl for this project
+**Bob**: I found Perl to be very similar to bash scripting in terms of syntax. I was surprised the ways in which we were able to use Perl for this project
 
-Christine: Perl is like lit. 
+**Christine**: Perl is like lit. 
 
-Kevin: Learning Perl is exiting! Learning a new programming lang gets easier the more programming languages you discover.
+**Kevin**: Learning Perl is exiting! Learning a new programming lang gets easier the more programming languages you discover.
 
-Kyle: The data types scare me.
+**Kyle**: The data types scare me.
 
-Raudo: Perl is kind of cool, not sure if i like it.
+**Raudo**: Perl is kind of cool, not sure if i like it.
 
 
 
-While Perl would not have been the first language that comes to mind for us to write a tic tac toe game,
+While Perl would not have been the first language that comes to mind for us to write a Tic Tac Toe game,
 we found that the support of object oriented procedure along with the ease of using text files made this
 challenge both simple and powerful. 
 
