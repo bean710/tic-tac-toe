@@ -138,6 +138,14 @@ sub Main {
 	print "VS CPU [1] or VS Player [2] or : ";
 	my $choice = <STDIN>;
 
+	while ($choice != 1 && $choice != 2)
+	{
+		print "Invalid Input!\n";
+		print "VS CPU [1] or VS Player [2] or : ";
+		$choice = <STDIN>;
+	}
+	
+	my $ret = "";
 
 	my $isGame = 1;
 	while ($isGame) {
@@ -150,18 +158,18 @@ sub Main {
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
-		my $ret = MakeMove($y, $x, 1);
-
 		if ($choice == 1) {
-			my $ret = MakeMove($y, $x, 1);
+			$ret = MakeMove($y, $x, 1);
 		}
-		if ($turn == 1) {	
+		elsif ($choice == 2) {
+			if ($turn == 1) {	
 			$ret = MakeMove($x, $y, $turn);	
 			$turn = 2;	
-		}	
-		elsif ($turn == 2) {	
-			$ret = MakeMove($x, $y, $turn);	
-			$turn = 1;	
+			}	
+			elsif ($turn == 2) {	
+				$ret = MakeMove($x, $y, $turn);	
+				$turn = 1;	
+			}
 		}
 
 		if ($ret == 0) {
