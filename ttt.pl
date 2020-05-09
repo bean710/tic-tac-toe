@@ -13,6 +13,10 @@ require 'CheckSetPlayer.pl';
 my @GameBoard = ([0, 0, 0], [0, 0, 0], [0, 0, 0]);
 my $choice = 1;
 my $turn = 1;
+my $counter = 0;
+my $isGame = 1;
+my $player1 = "X";
+my $player2 = "O";
 #my %GB = {
 #	'00' => 0, '01' => 0, '02' => 0,
 #	'10' => 0, '11' => 0, '12' => 0,
@@ -27,7 +31,7 @@ sub MakeMove {
 	}
 
 	if ($player == 2) {
-		print "Made move $x, $y\n";
+		print "Computer made move $x, $y\n";
 	}
 
 	#my $coord = $x.$y."";
@@ -71,7 +75,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetRobot($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2);
+			MakeMove($n, $i, 2);
 			return 1;
 		}
 	}
@@ -100,7 +104,7 @@ sub MakeSmartRobotMove {
 	foreach $i (0..2) {
 		my $n = CheckSetPlayer($GameBoard[0][$i], $GameBoard[1][$i], $GameBoard[2][$i]);
 		if ($n != -1) {
-			MakeMove($i, $n, 2);
+			MakeMove($n, $i, 2);
 			return 1;
 		}
 	}
@@ -134,6 +138,24 @@ sub MakeRobotMove {
 	return 0;
 }
 
+sub Print_grid {
+    print "Board: \n";
+    my $length = scalar @GameBoard;
+    for(my $m = 0; $m < $length; $m++) {
+		for(my $n = 0; $n < $length; $n++) {
+			my $gbr = $GameBoard[$m][$n];
+			if ($gbr == 1){
+				print "$player1 ";
+			} elsif ($gbr == 2) {
+				print "$player2 ";
+			} else {
+				print "* ";
+			}
+		}
+		print("\n")
+    }
+}
+
 sub Main {
 	print "VS CPU [1] or VS Player [2] or : ";
 	my $choice = <STDIN>;
@@ -144,14 +166,12 @@ sub Main {
 		print "VS CPU [1] or VS Player [2] or : ";
 		$choice = <STDIN>;
 	}
-	
-	my $ret = "";
 
+	my $ret = "";
 	my $isGame = 1;
 	while ($isGame) {
 		print "Enter x coordinate: ";
 		my $x = <STDIN>;
-
 		print "Enter y coordinate: ";
 		my $y = <STDIN>;
 
@@ -177,8 +197,7 @@ sub Main {
 			Print_grid();
 			next;
 		}
-
-		print "You made move at x:$x y:$y\n";
+		#print "You made move at x:$x y:$y\n";
 		Print_grid();
 
 		if ($choice == 1) {
@@ -187,14 +206,18 @@ sub Main {
 		}
 
 		Print_grid();
+		$counter = $counter + 1;
 
 		if (Check_rows(@GameBoard, $choice) == 1 || 
 			Check_cols(@GameBoard, $choice) == 1 || 
 			Check_diag(@GameBoard, $choice) == 1) {
 			$isGame = 0;
 		}
+		elsif ($counter == 9) {
+			print "DRAW!\n";
+			$isGame = 0;
+		}
 	}
 	print "Status: $isGame";
 }
-# Print_grid();
 Main();
