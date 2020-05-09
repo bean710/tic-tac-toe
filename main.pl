@@ -252,7 +252,7 @@ sub Main {
 		my $x = 0;
 		my $y = 0;
 		if (($pnum == 2) or $turn == 1) {
-			print "Player $pnum\'s turn\n";
+			print "Player $turn\'s turn\n";
 			print "Enter x coordinate: ";
 			$x = <STDIN>;
 			$ret = 0;
