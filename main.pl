@@ -63,7 +63,7 @@ sub MakeMove {
 	}
 
 	if ($player == 2) {
-
+		print "Made move $x, $y\n";
 	}
 
 	#my $coord = $x.$y."";
@@ -84,7 +84,7 @@ sub MakeMove {
 sub CheckSetPlayer {
 	my ($a, $b, $c) = @_;
 
-	print "Checking: $a$b$c\n";
+	#print "Checking: $a$b$c\n";
 
 	if ($a == 1 and $b == 1 and $c == 0) {
 		return 2;
@@ -102,7 +102,7 @@ sub CheckSetPlayer {
 sub CheckSetRobot {
 	my ($a, $b, $c) = @_;
 
-	print "Checking: $a$b$c\n";
+	#print "Checking: $a$b$c\n";
 
 	if ($a == 2 and $b == 2 and $c == 0) {
 		return 2;
@@ -145,7 +145,7 @@ sub MakeSmartRobotMove {
 
 	$n = CheckSetRobot($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
 	if ($n != -1) {
-		MakeMove(2 - $n, $n, 2);
+		MakeMove($n, 2 - $n, 2);
 		return 1;
 	}
 
@@ -174,7 +174,7 @@ sub MakeSmartRobotMove {
 
 	$n = CheckSetPlayer($GameBoard[0][2], $GameBoard[1][1], $GameBoard[2][0]);
 	if ($n != -1) {
-		MakeMove(2 - $n, $n, 2);
+		MakeMove($n, 2 - $n, 2);
 		return 1;
 	}
 
