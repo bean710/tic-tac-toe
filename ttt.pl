@@ -27,9 +27,11 @@ my $player2 = "O";
 #};
 
 sub Main {
+	# Prompt the player to pick 1 or 2 players
 	print "VS CPU [1] or VS Player [2] or : ";
 	my $choice = <STDIN>;
 
+	# Validate response
 	while ($choice != 1 && $choice != 2)
 	{
 		print "Invalid Input!\n";
@@ -52,9 +54,11 @@ sub Main {
 		$x =~ s/[^0-9]*//g;
 		$y =~ s/[^0-9]*//g;
 
+		# Submit the player's move to the game board
 		$ret = MakeMove($y, $x, $turn, \@GameBoard);
 
 		if ($ret == 0) {
+			# The move was invalid, prompt player again
 			Print_grid(\@GameBoard);
 			print "Invalid move! Try again.\n";
 			next;
@@ -70,6 +74,7 @@ sub Main {
 		}
 		#print "You made move at x:$x y:$y\n";
 
+		# If the player is playing against the computer, make a computer move
 		if ($choice == 1) {
 			MakeSmartRobotMove(\@GameBoard);
 			print "Computer moved: \n";
@@ -78,6 +83,7 @@ sub Main {
 		Print_grid(\@GameBoard);
 		$counter = $counter + 1;
 
+		# Check if anybody has won
 		if (Check_rows(@GameBoard, $choice) == 1 || 
 			Check_cols(@GameBoard, $choice) == 1 || 
 			Check_diag(@GameBoard, $choice) == 1) {
