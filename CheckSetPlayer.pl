@@ -1,3 +1,4 @@
+# This function checks if three positions are all taken by the player
 sub CheckSetPlayer {
 	my ($a, $b, $c) = @_;
 
