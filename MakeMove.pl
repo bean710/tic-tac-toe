@@ -1,7 +1,8 @@
 sub MakeMove {
-        my @GameBoard = @{$_[3]};
+	my @GameBoard = @{$_[3]};
 	my ($x, $y, $player) = @_;
 
+	#Validates that the move was in bounds
 	if ($x < 0 or $x > 2 or $y < 0 or $y > 2) {
 		return 0;
 	}
@@ -10,11 +11,8 @@ sub MakeMove {
 		print "Made move $x, $y\n";
 	}
 
-	#my $coord = $x.$y."";
-	#print "Coord: $coord\n";
-	#my $val = $GB{'00'};
 	my $val = $GameBoard[$x][$y];
-	#print "On val: $val\n";
+	# Checks if the spot is already taken
 	if ($val != 0) {
 		return 0;
 	} else {

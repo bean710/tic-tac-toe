@@ -1,3 +1,4 @@
+# This function loops through all positions: left to right, top to bottom to find the first empty spot
 sub MakeRobotMove {
     my @GameBoard = @{$_[0]};
     my $length = scalar @GameBoard;
